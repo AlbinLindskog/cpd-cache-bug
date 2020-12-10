@@ -1,6 +1,6 @@
 cdp-cache bug
 -------------
-cdp-cache does not handle non-empty non-200 response correctly. The response
+cdp-cache does not handle non-empty non-200 responses correctly. The response
 content is handled correctly, but the status code is rewritten to 200.
 
 This is a bare-bones example project to illustrate the issue. Run::
@@ -9,9 +9,9 @@ This is a bare-bones example project to illustrate the issue. Run::
 
 to start the project.
 
-Requests to localhost:5000 is handled by Gunicorn/Django directly while
+Requests to localhost:5000 are handled by Gunicorn/Django directly while
 requests to localhost:8080 are proxied through Caddy (with cdp-cache
-installed). The responses from Caddy have the wrong status code.::
+installed). The responses from Caddy have the wrong status code::
 
     $ curl localhost:5000/ -i
     HTTP/1.1 403 Forbidden
@@ -35,7 +35,7 @@ installed). The responses from Caddy have the wrong status code.::
     The status should be 403
 
 
-Removing cdp-cache from the Caddyfile resolves the issue.::
+Removing cdp-cache from the Caddyfile resolves the issue::
 
     $ curl localhost:8080/ -i
     HTTP/1.1 403 Forbidden
@@ -47,7 +47,7 @@ Removing cdp-cache from the Caddyfile resolves the issue.::
 
     The status should be 403
 
-Responses without any content are handled correctly, for some reason.::
+Responses without any content are handled correctly, for some reason::
 
     $ curl localhost:8080/ -i
     HTTP/1.1 403 Forbidden
