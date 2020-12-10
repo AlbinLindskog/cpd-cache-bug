@@ -1,0 +1,11 @@
+{
+    order http_cache before reverse_proxy
+}
+
+http://localhost {
+    reverse_proxy django:5000
+    http_cache {
+        cache_type in_memory
+        match_path /
+    }
+}

@@ -1,0 +1,7 @@
+FROM caddy:2.1.1-builder AS builder
+
+RUN xcaddy build --with github.com/sillygod/cdp-cache
+
+FROM caddy:2.1.1
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+COPY ./Caddyfile /etc/caddy/Caddyfile

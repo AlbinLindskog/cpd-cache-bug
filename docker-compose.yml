@@ -1,0 +1,25 @@
+version: '3'
+
+volumes:
+  caddy_data: {}
+
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    command: /start
+    ports:
+      - "0.0.0.0:5000:5000"
+
+  caddy:
+    build:
+      context: ./docker/caddy
+    depends_on:
+      - django
+    volumes:
+      - caddy_data:/data
+    ports:
+      - "0.0.0.0:8080:80"
+      - "0.0.0.0:8443:443"
