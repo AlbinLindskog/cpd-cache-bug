@@ -3,6 +3,8 @@ cdp-cache bug
 cdp-cache does not handle non-empty non-200 responses correctly. The response
 content is handled correctly, but the status code is rewritten to 200.
 
+Issue raised here: https://github.com/sillygod/cdp-cache/issues/35
+
 This is a bare-bones example project to illustrate the issue. Run::
 
     $ docker-compose up
